@@ -1,0 +1,32 @@
+# Compiled object files
+*.o
+*.obj
+
+# Executable files
+FS
+
+# Build directories
+build/
+dist/
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Binary files
+file_structure.bin
+super.bin
+
+# Dependency directories
+deps/
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Temp files
+*.swp
+*.swo
+*~ 
