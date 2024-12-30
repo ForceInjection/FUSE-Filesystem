@@ -1,6 +1,6 @@
 # 基于 FUSE 的简单文件系统
 
-一个使用 `C` 语言和 `FUSE` 编写的基础文件系统。
+一个使用 `C` 语言和 `FUSE` 编写的简单文件系统实现，可用于教学目的。
 
 ## 关于 FUSE
 
@@ -17,11 +17,11 @@
 sudo apt-get install libfuse-dev
 ```
 
-## 使用文件系统
+## 编译并运行 FUSE 文件系统
 ### 1. 克隆仓库
 
 ```bash
-git clone https://github.com/Aveek-Saha/FUSE-Filesystem.git FS
+git clone git@github.com:ForceInjection/FUSE-Filesystem.git
 ```
 
 ### 2. 进入目录并创建挂载点
