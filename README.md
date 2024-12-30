@@ -28,28 +28,28 @@ git clone git@github.com:ForceInjection/FUSE-Filesystem.git
 
 ```bash
 cd FS
-mkdir mountpoint
+mkdir -p /home/test
 ```
 
 ### 3. 编译并运行 FS.c
 
 ```bash
 gcc FS.c -o FS `pkg-config fuse --cflags --libs`
-./FS -f mountpoint
+./FS -f /home/test
 ```
 
 ### 4. 使用文件系统
-
-将当前工作目录切换到 `mountpoint`，即可使用文件系统：
+将当前工作目录切换到 `/home/test`，即可使用文件系统：
 
 ```bash
-cd mountpoint
+cd /home/test
 ```
 
 ### 5. 创建文件
 使用以下命令创建文件：
 
 ```bash
+mkdir -p grissom
 touch test.txt
 echo "Hello, World!" > test.txt
 ```
