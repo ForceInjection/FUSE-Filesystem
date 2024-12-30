@@ -1,57 +1,110 @@
-# FUSE Filesystem
-A basic file system written in C using FUSE
+# 基于 FUSE 的简单文件系统实现
 
+一个使用 `C` 语言和 `FUSE` 编写的基础文件系统。
 
-# About fuse
-From the [official repository](https://github.com/libfuse/libfuse)
->  FUSE (Filesystem in Userspace) is an interface for userspace programs to export a filesystem to the Linux kernel. The FUSE project consists of two components: the fuse kernel module and the libfuse userspace library. libfuse provides the reference implementation for communicating with the FUSE kernel module.
+## 关于 FUSE
 
-Basically Fuse allows us to call our own functions instead of using the default kernel functions when a system call is used. That is incoming requests from the kernel are passed to the main program using callbacks. Where we can define our own functions to handle them.
+参见 `FUSE` [官方仓库](https://github.com/libfuse/libfuse)：
 
+> FUSE（用户空间文件系统）是一个接口，允许用户空间程序将文件系统导出到 Linux 内核。FUSE 项目由两个组件组成：FUSE 内核模块和 libfuse 用户空间库。libfuse 提供了与 FUSE 内核模块通信的参考实现。
 
-# Installing FUSE
-For Ubuntu
-```
-$ sudo apt-get install libfuse-dev
-```
+简单来说，`FUSE` 允许我们在系统调用时调用自己的函数，而不是使用默认的内核函数。内核的请求通过回调传递给主程序，我们可以在其中定义自己的函数来处理这些请求。
 
+## 安装 FUSE
+在 `Ubuntu` 上安装：
 
-# Using the Filesystem
-
-Clone this repository
-```
-$ git clone https://github.com/Aveek-Saha/FUSE-Filesystem.git FS
+```bash
+sudo apt-get install libfuse-dev
 ```
 
-cd into the directory and create a mount point
+## 使用文件系统
+### 1. 克隆仓库
+
+```bash
+git clone https://github.com/Aveek-Saha/FUSE-Filesystem.git FS
 ```
-$ cd FS
-$ mkdir mountpoint
+
+### 2. 进入目录并创建挂载点
+
+```bash
+cd FS
+mkdir mountpoint
 ```
-Complile and run FS.c
+
+### 3. 编译并运行 FS.c
+
+```bash
+gcc FS.c -o FS `pkg-config fuse --cflags --libs`
+./FS -f mountpoint
 ```
-$ gcc FS.c -o FS `pkg-config fuse --cflags --libs`
-$ ./ FS - f path/ to/ mountpoint
+
+### 4. 使用文件系统
+
+将当前工作目录切换到 `mountpoint`，即可使用文件系统：
+
+```bash
+cd mountpoint
 ```
-Change your current working directory to ```mountpoint``` and use the file system.
 
+### 5. 创建文件
+使用以下命令创建文件：
 
-# Operations
+```bash
+touch test.txt
+echo "Hello, World!" > test.txt
+```
 
-The following operations are implimented -
-- Create and Remove a directory.
-- Create, Read and write to a file.
-- Delete an existing file.
-- Appending to and truncating a file.
-- Access, modified and status change time updates.
-- Open and close a file.
+### 6. 读取文件
+使用以下命令读取文件内容：
 
-# Team
-This project was a team effort by
+```bash
+cat test.txt
+```
 
-| Name | GitHub Profile |
-|:---:|:---:|
-|  Arvind Srinivasan | [arvindsrinivasan](https://github.com/arvindsrinivasan) |
-|  Aprameya Bharadwaj | [aprameyabharadwaj](https://github.com/aprameyabharadwaj) |
-|  Anish Kasi | [anishkasi](https://github.com/anishkasi) |
-|  Aveek Saha | [aveek-saha](https://github.com/aveek-saha) |
+### 7. 卸载文件系统
+完成操作后，卸载文件系统：
+
+```bash
+fusermount -u mountpoint
+```
+
+### 8. 查看 debug 输出
+```bash
+./FS -f /home/test/
+LOADING
+GETATTR /
+GETATTR /
+GETATTR /
+READDIR
+:grissom:
+:test.txt:
+GETATTR /grissom
+GETATTR /test.txt
+GETATTR /
+READDIR
+:grissom:
+:test.txt:
+GETATTR /
+GETATTR /test.txt
+OPEN
+GETATTR /test2.txt
+CREATEFILE
+SAVING
+1111000000000000000000000000000
+GETATTR /test2.txt
+WRITING
+SAVING
+1111000000000000000000000000000
+...
+```
+
+## 支持的操作
+
+以下操作已实现：
+
+- 创建和删除目录。
+- 创建、读取和写入文件。
+- 删除现有文件。
+- 追加和截断文件。
+- 更新访问、修改和状态更改时间。
+- 打开和关闭文件。

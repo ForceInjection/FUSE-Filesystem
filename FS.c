@@ -1611,17 +1611,17 @@ int mywrite(const char *path, const char *buf, size_t size, off_t offset, struct
 }
 
 static struct fuse_operations operations =
-	{
-		.mkdir = mymkdir,
-		.getattr = mygetattr,
-		.readdir = myreaddir,
-		.rmdir = myrmdir,
-		.open = myopen,
-		.read = myread,
-		.write = mywrite,
-		.create = mycreate,
-		.rename = myrename,
-		.unlink = myrm,
+{
+    .mkdir = mymkdir,       // 创建目录
+    .getattr = mygetattr,   // 获取文件/目录属性
+    .readdir = myreaddir,   // 读取目录内容
+    .rmdir = myrmdir,       // 删除目录
+    .open = myopen,         // 打开文件
+    .read = myread,         // 读取文件内容
+    .write = mywrite,       // 写入文件内容
+    .create = mycreate,     // 创建文件
+    .rename = myrename,     // 重命名文件/目录
+    .unlink = myrm,         // 删除文件
 };
 
 int main(int argc, char *argv[])
@@ -1669,7 +1669,6 @@ int main(int argc, char *argv[])
 		initialize_root_directory();
 	}
 
-	// 启动FUSE文件系统
+	// FUSE 库的主入口函数，用于启动文件系统, 指向 fuse_operations 结构体的指针
 	return fuse_main(argc, argv, &operations, NULL);
 }
-
