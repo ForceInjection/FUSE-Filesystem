@@ -10,6 +10,14 @@
 
 简单来说，`FUSE` 允许我们在系统调用时调用自己的函数，而不是使用默认的内核函数。内核的请求通过回调传递给主程序，我们可以在其中定义自己的函数来处理这些请求。
 
+### 相关文章
+
+* [**Linux 用户态文件系统 FUSE 简介**](https://mp.weixin.qq.com/s/Db0xBSMzqT_wPIKaLkGtNA)
+* [**Linux FUSE 文件系统的相关一些管理操作**](https://mp.weixin.qq.com/s/ZVTdSeF-LtsiSvVeLYsubw)
+* [**To FUSE or Not to FUSE: Performance of User-Space File Systems**
+](https://mp.weixin.qq.com/s/6GDPfij75z4PXGVlAqTJhQ)
+
+
 ## 安装 FUSE
 在 `Ubuntu` 上安装：
 
@@ -52,6 +60,7 @@ cd /home/test
 mkdir -p grissom
 touch test.txt
 echo "Hello, World!" > test.txt
+...
 ```
 
 ### 6. 读取文件
@@ -65,11 +74,12 @@ cat test.txt
 完成操作后，卸载文件系统：
 
 ```bash
-fusermount -u mountpoint
+fusermount -u /home/test
 ```
 
 ### 8. 查看 debug 输出
 ```bash
+# -f 表示前台运行
 ./FS -f /home/test/
 LOADING
 GETATTR /
